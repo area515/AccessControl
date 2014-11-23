@@ -144,12 +144,15 @@ public class RfidService {
 		File aclFile = new File(HostProperties.Instance().getAclFile());
 		ArrayList<Rfid> acl = new ArrayList<Rfid>();
 		for(String line : FileUtils.readLines(aclFile)){
+			
 			String[] rawRfid = line.split("\\|");
 			//0=id
 			//1=key
-			// Debug
-
-			acl.add(new Rfid(rawRfid[1],rawRfid[0]));
+			// Solid enough
+			if (rawRfid != null && rawRfid.length > 1){
+				acl.add(new Rfid(rawRfid[1],rawRfid[0]));
+			}
+			
 		}
 		return acl;
 	}
