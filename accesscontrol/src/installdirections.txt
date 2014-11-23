@@ -1,0 +1,14 @@
+
+1. Create a realm.properties file as root in "/etc/"
+2a. Add the following to the realm.properties file
+
+admin: Password1:rfid,read,write,delete
+reader: Password1:rfid,read
+writer: Password1:rfid,write
+deleter: Password1:rfid,delete
+
+
+2b. Another example can be found here:
+http://alvinalexander.com/java/jwarehouse/jetty-6.1.9/etc/realm.properties.shtml
+
+3. Change the passwords from "Password1" to whatever password you use

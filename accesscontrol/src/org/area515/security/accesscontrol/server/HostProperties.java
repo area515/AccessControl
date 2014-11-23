@@ -51,6 +51,7 @@ public class HostProperties {
 		System.out.println(System.getProperty("user.home"));
 		
 		if(!new File(aclFile).exists()){
+			System.out.println("ACL does not exist, creating one at " + new File(aclFile).getAbsolutePath());
 //			throw new IOException("ACL file doesn't exist at: " + new File(aclFile).getAbsolutePath());
 		FileUtils.forceMkdir(new File(aclFile));
 		}

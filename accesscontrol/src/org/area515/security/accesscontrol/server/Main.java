@@ -42,7 +42,7 @@ public class Main {
 		  // webapp's web.xml and since it has a lifecycle of its own we register it as a bean with the Jetty server
 		  // object so it can be started and stopped according to the lifecycle of the server itself. In this example
 		  // the name can be whatever you like since we are not dealing with webapp realms.
-		  LoginService loginService = new HashLoginService("MyRealm", "C:\\nonsync\\realm\\realm.properties"); //"src/test/resources/realm.properties");
+		  LoginService loginService = new HashLoginService("MyRealm", "/etc/realm.properties");//"src/test/resources/realm.properties");
 		  server.addBean(loginService); 
 
 		  // A security handler is a jetty handler that secures content behind a particular portion of a url space. The
