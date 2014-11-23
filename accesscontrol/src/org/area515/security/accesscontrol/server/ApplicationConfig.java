@@ -8,19 +8,6 @@ import javax.ws.rs.core.Application;
 import org.area515.security.accesscontrol.services.RfidService;
 
 public class ApplicationConfig extends Application{
-
-//	private static Set services = new HashSet(); 
-//	 public  ApplicationConfig() {     
-//	   // initialize restful services   
-//	   services.add(new RfidService());  
-//	 }
-//	 @Override
-//	 public  Set getSingletons() {
-//	  return services;
-//	 }  
-//	 public  static Set getServices() {  
-//	  return services;
-//	 } 
 	
 	private Set<Object> singletons = new HashSet<Object>();
     private Set<Class<?>> classes = new HashSet<Class<?>>();

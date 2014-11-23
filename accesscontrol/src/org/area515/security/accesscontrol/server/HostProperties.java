@@ -43,26 +43,18 @@ public class HostProperties {
 	 */
 	
 	public static void init() throws IOException{
-		//win
-//		aclFile = new File("C:\\dev\\acl").getAbsolutePath();
-		
 		//nix
 		aclFile = new File(System.getProperty("user.home"),"rfid/rfidreader/acl").getAbsolutePath();		
-		System.out.println(System.getProperty("user.home"));
+		System.out.println(aclFile);
 		
 		if(!new File(aclFile).exists()){
 			System.out.println("ACL does not exist, creating one at " + new File(aclFile).getAbsolutePath());
-//			throw new IOException("ACL file doesn't exist at: " + new File(aclFile).getAbsolutePath());
-		FileUtils.forceMkdir(new File(aclFile));
+			FileUtils.forceMkdir(new File(aclFile));
 		}
-//		System.out.println("ACL file is located at: " + aclFile);
+		else{
+			System.out.println("ACL file exists"); 			
+		}
 		
 	}
-	
-//	public static Properties getHostProperties() throws IOException{
-//		Properties properties = new Properties();
-//		properties.load(HostProperties.class.getClassLoader().getResourceAsStream("config.properties"));
-//		return properties;
-//	}
 	
 }

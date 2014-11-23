@@ -2,7 +2,12 @@ package org.area515.security.accesscontrol.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,15 +16,17 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FileUtils;
 import org.area515.security.accesscontrol.domain.Rfid;
+import org.area515.security.accesscontrol.domain.SourceAddress;
 import org.area515.security.accesscontrol.server.HostProperties;
 
 @Path("rfid")
-@RolesAllowed("rfid")
+//@RolesAllowed("rfid")
 public class RfidService {
 
 	
@@ -35,7 +42,6 @@ public class RfidService {
 	
 	private boolean exists(String key) throws IOException{
 		List<Rfid> rfids = getAcl();
-//		System.out.println("acl size: "+ rfids.size());
 		for(Rfid rfid : rfids){
 			System.out.println("RFID: " + rfid.toString());
 			if(rfid.getKey().equals(key)){return true;}
@@ -147,6 +153,36 @@ public class RfidService {
 		}
 		return acl;
 	}
+	
+	@GET
+	@Path("ping/{command}")
+	@Consumes("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
+	public List<SourceAddress> ping(@PathParam("command") String command) throws SocketException {
+		
+		
+		if(command.equals("marco")){
+		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+		
+		ArrayList<SourceAddress> sourceAddress = new ArrayList<SourceAddress>();
+		for (NetworkInterface netint : Collections.list(nets)) {
+			SourceAddress source = new SourceAddress();
+
+			Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+			source.setInterface(netint.getName());
+
+			for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+				sourceAddress.add(new SourceAddress(netint.getName(),inetAddress.getHostAddress()));
+			}
+
+		}
+		
+		return sourceAddress;
+		}
+		else{return null;}
+	}
+	
+	
 	
 
 }
