@@ -29,7 +29,8 @@ import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
+		// Test the build
+		
 		Server server = new Server(9091);
 		ServletContextHandler context = new ServletContextHandler(
 				ServletContextHandler.SESSIONS);
